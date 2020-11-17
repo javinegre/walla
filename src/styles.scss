@@ -12,8 +12,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$wallapop-test-primary: mat-palette($mat-indigo);
-$wallapop-test-accent: mat-palette($mat-pink, A200, A100, A400);
+$wallapop-test-primary: mat-palette($mat-teal);
+$wallapop-test-accent: mat-palette($mat-blue-gray, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $wallapop-test-warn: mat-palette($mat-red);
@@ -37,3 +37,15 @@ $wallapop-test-theme: mat-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// GLOBAL STYLES
+
+.l-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.d-flex {
+  display: flex;
+}
