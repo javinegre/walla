@@ -10,6 +10,10 @@ import {MatButtonModule} from '@angular/material/button';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { ItemListComponent } from './item-list/item-list.component';
 
+import {HttpClientModule} from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +24,10 @@ import { ItemListComponent } from './item-list/item-list.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
     MatToolbarModule,
     MatIconModule,
     MatButtonModule

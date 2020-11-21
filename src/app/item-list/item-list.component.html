@@ -1,1 +1,5 @@
-<p>item-list works!</p>
+<ul class="item-list">
+  <li *ngFor="let item of itemList">
+    <strong>{{item.title}}</strong> - {{item.description}}
+  </li>
+</ul>
