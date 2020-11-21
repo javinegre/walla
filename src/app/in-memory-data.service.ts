@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import mockItemList from '../mock-data/item-list';
-import { IItem } from '../models/interface';
+import { TFavoriteItemList, TItemUid } from '../models/types';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { IItem } from '../models/interface';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const itemList = mockItemList;
-    const favoriteItemList: IItem[] = [];
+    const favoriteItemList: TFavoriteItemList = [];
 
     return { itemList, favoriteItemList };
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IItem } from '../../models/interface';
+import { IItem } from '../../models/interfaces';
 import { ItemListService } from '../item-list.service';
 
 @Component({

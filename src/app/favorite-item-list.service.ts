@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { IItem } from '../models/interfaces';
+import { catchError } from 'rxjs/operators';
+import { TFavoriteItemList } from '../models/types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ItemListService {
-  private itemListUrl = 'api/itemList';
+export class FavoriteItemListService {
+  private favoriteItemListUrl = 'api/favoriteItemList';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -16,8 +17,10 @@ export class ItemListService {
 
   constructor(private http: HttpClient) {}
 
-  getItemList(): Observable<IItem[]> {
-    return this.http.get<IItem[]>(this.itemListUrl).pipe(catchError(this.handleError<IItem[]>('getItemList', [])));
+  getFavoriteItemList(): Observable<TFavoriteItemList> {
+    return this.http
+      .get<TFavoriteItemList>(this.favoriteItemListUrl)
+      .pipe(catchError(this.handleError<TFavoriteItemList>('getFavoriteItemList', [])));
   }
 
   /**

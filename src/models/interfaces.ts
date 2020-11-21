@@ -1,5 +1,7 @@
+import { TItemUid } from './types';
+
 export interface IItem {
-  uid: string;
+  uid: TItemUid;
   title: string;
   description: string;
   price: string;

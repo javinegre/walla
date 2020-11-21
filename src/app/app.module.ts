@@ -13,9 +13,10 @@ import { ItemListComponent } from './item-list/item-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import { FavoriteItemListComponent } from './favorite-item-list/favorite-item-list.component';
 
 @NgModule({
-  declarations: [AppComponent, MainNavComponent, ItemListComponent],
+  declarations: [AppComponent, MainNavComponent, ItemListComponent, FavoriteItemListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
