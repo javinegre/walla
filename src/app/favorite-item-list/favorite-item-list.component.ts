@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoriteItemListService } from '../favorite-item-list.service';
-import { TItemUid } from '../../models/types';
+import { IFavoriteItem } from '../../models/interfaces';
 
 @Component({
   selector: 'app-favorite-item-list',
@@ -8,7 +8,7 @@ import { TItemUid } from '../../models/types';
   styleUrls: ['./favorite-item-list.component.scss'],
 })
 export class FavoriteItemListComponent implements OnInit {
-  favoriteItemList: TItemUid[] | undefined;
+  favoriteItemList: IFavoriteItem[] | undefined;
 
   constructor(private favoriteItemListService: FavoriteItemListService) {}
 

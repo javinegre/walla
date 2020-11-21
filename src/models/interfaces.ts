@@ -8,3 +8,8 @@ export interface IItem {
   email: string;
   image: string;
 }
+
+export interface IFavoriteItem {
+  id: number;
+  uid: TItemUid;
+}

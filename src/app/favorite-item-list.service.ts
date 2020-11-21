@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { IItem } from '../models/interfaces';
+import { Observable, of, Subject, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { IFavoriteItem } from '../models/interfaces';
 import { catchError } from 'rxjs/operators';
-import { TFavoriteItemList } from '../models/types';
+import { TItemUid } from '../models/types';
 
 @Injectable({
   providedIn: 'root',
@@ -11,16 +12,54 @@ import { TFavoriteItemList } from '../models/types';
 export class FavoriteItemListService {
   private favoriteItemListUrl = 'api/favoriteItemList';
 
+  private listSubject: Subject<IFavoriteItem[]> | undefined;
+  private listRequest: Observable<IFavoriteItem[]> | undefined;
+  private listSubscription: Subscription | undefined;
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.listSubject = new Subject<IFavoriteItem[]>();
+  }
 
-  getFavoriteItemList(): Observable<TFavoriteItemList> {
+  getFavoriteItemList(): Observable<IFavoriteItem[]> {
+    // https://stackoverflow.com/questions/40249629/how-do-i-force-a-refresh-on-an-observable-service-in-angular2
+    this.listRequest = this.http
+      .get<IFavoriteItem[]>(this.favoriteItemListUrl)
+      .pipe(catchError(this.handleError<IFavoriteItem[]>('getFavoriteItemList', [])));
+
+    this.listRequest.subscribe(
+      (result) => this.listSubject?.next(result),
+      (err) => this.listSubject?.error(err)
+    );
+
+    return (this.listSubject as Subject<IFavoriteItem[]>).asObservable();
+  }
+
+  addItem(itemUid: TItemUid): Observable<IFavoriteItem> {
     return this.http
-      .get<TFavoriteItemList>(this.favoriteItemListUrl)
-      .pipe(catchError(this.handleError<TFavoriteItemList>('getFavoriteItemList', [])));
+      .post<IFavoriteItem>(this.favoriteItemListUrl, { uid: itemUid }, this.httpOptions)
+      .pipe(
+        tap((_) => {
+          this.getFavoriteItemList();
+        })
+      )
+      .pipe(catchError(this.handleError<IFavoriteItem>('addItem')));
+  }
+
+  deleteItem(favoriteItem: IFavoriteItem): Observable<IFavoriteItem> {
+    const url = `${this.favoriteItemListUrl}/${favoriteItem.id}`;
+
+    return this.http
+      .delete<IFavoriteItem>(url, this.httpOptions)
+      .pipe(
+        tap((_) => {
+          this.getFavoriteItemList();
+        })
+      )
+      .pipe(catchError(this.handleError<IFavoriteItem>('deleteItem')));
   }
 
   /**
@@ -36,5 +75,9 @@ export class FavoriteItemListService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  onDestroy() {
+    this.listSubscription?.unsubscribe();
   }
 }

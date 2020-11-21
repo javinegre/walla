@@ -5,5 +5,12 @@
     <strong>{{item.title}}</strong>
     -
     {{item.description}}
+    <br/>
+    <button *ngIf="!isFavoriteItem(item)" (click)="addToFavoriteList(item)">
+      Star
+    </button>
+    <button *ngIf="isFavoriteItem(item)" (click)="deleteFromFavoriteList(item)">
+      Unstar
+    </button>
   </li>
 </ul>
