@@ -1,7 +1,8 @@
 export interface IItem {
-  title: string,
-  description: string,
-  price: string,
-  email: string,
-  image: string
+  uid: string;
+  title: string;
+  description: string;
+  price: string;
+  email: string;
+  image: string;
 }
