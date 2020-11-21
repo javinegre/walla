@@ -14,20 +14,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { FavoriteItemListComponent } from './favorite-item-list/favorite-item-list.component';
+import { FavoriteListDialogComponent } from './favorite-list-dialog/favorite-list-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AppComponent, MainNavComponent, ItemListComponent, FavoriteItemListComponent],
+  declarations: [AppComponent, MainNavComponent, ItemListComponent, FavoriteItemListComponent, FavoriteListDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false }),
+    MatDialogModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
   ],
   providers: [],
+  entryComponents: [FavoriteListDialogComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

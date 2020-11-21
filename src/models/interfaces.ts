@@ -13,3 +13,13 @@ export interface IFavoriteItem {
   id: number;
   uid: TItemUid;
 }
+
+export interface IListFilterConfig {
+  uids?: TItemUid[];
+  searchTerm?: string;
+  searchCriteria?: string;
+}
+
+export interface IListRefinementConfig {
+  filters?: IListFilterConfig;
+}

@@ -1,5 +1,16 @@
-<ul class="favorite-item-list">
-  <li *ngFor="let item of favoriteItemList">
-    <code>{{item.id}} - {{item.uid}}</code>
-  </li>
-</ul>
+<div *ngIf="itemList === undefined" class="favorite-item-list--empty">
+  Loading...
+</div>
+
+<ng-container *ngIf="itemList !== undefined">
+  <div *ngIf="!itemList?.length" class="favorite-item-list--empty">
+    Your favorite item list is empty
+  </div>
+  <ul *ngIf="itemList?.length" class="favorite-item-list">
+    <li *ngFor="let item of itemList">
+      <strong>{{item.title}}</strong>
+      -
+      {{item.description}}
+    </li>
+  </ul>
+</ng-container>
