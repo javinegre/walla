@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "fix:prettier": "./node_modules/prettier/bin-prettier.js  --config ./.prettierrc --write  --list-different 'src/{app,environments,assets}/**/**/*{.ts,.js,.json,.css,.scss}'"
   },
   "private": true,
   "dependencies": {

@@ -1,29 +1,23 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {IItem} from '../models/interface';
+import { IItem } from '../models/interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ItemListService {
-
   private itemListUrl = 'api/itemList';
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   getItemList(): Observable<IItem[]> {
-    return this.http.get<IItem[]>(this.itemListUrl)
-      .pipe(
-        catchError(this.handleError<IItem[]>('getItemList', []))
-      );
+    return this.http.get<IItem[]>(this.itemListUrl).pipe(catchError(this.handleError<IItem[]>('getItemList', [])));
   }
 
   /**
@@ -34,7 +28,6 @@ export class ItemListService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       console.error(error); // log to console instead
 
       // Let the app keep running by returning an empty result.
