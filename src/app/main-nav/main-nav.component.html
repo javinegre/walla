@@ -1,8 +1,8 @@
-<mat-toolbar color="primary">
-  <nav class="d-flex l-wrapper">
+<mat-toolbar color="primary" class="main-nav--sticky">
+  <nav class="main-nav l-wrapper">
     <div>Item List</div>
-    <button mat-stroked-button (click)="openFavoriteListDialog()" href="https://www.google.com/" target="_blank">
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">star</mat-icon>
+    <button class="main-nav__favorites" mat-stroked-button (click)="openFavoriteListDialog()">
+      <mat-icon class="main-nav__favorites__icon" aria-hidden="false" aria-label="Favorite list">star</mat-icon>
       Favorites ({{getFavoriteListCount()}})
     </button>
   </nav>

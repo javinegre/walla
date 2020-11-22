@@ -1,16 +1,27 @@
-<div *ngIf="itemList === undefined" class="favorite-item-list--empty">
-  Loading...
+<div *ngIf="itemList === undefined" class="favorite-item-list favorite-item-list--loading">
+  <mat-progress-spinner color="primary" mode="indeterminate" diameter="44"></mat-progress-spinner>
 </div>
 
 <ng-container *ngIf="itemList !== undefined">
-  <div *ngIf="!itemList?.length" class="favorite-item-list--empty">
+  <div *ngIf="!itemList?.length" class="favorite-item-list favorite-item-list--empty">
     Your favorite item list is empty
   </div>
-  <ul *ngIf="itemList?.length" class="favorite-item-list">
-    <li *ngFor="let item of itemList">
-      <strong>{{item.title}}</strong>
-      -
-      {{item.description}}
+  <ul *ngIf="itemList?.length" class="favorite-item-list l-list--unstyled">
+    <li *ngFor="let item of itemList" class="favorite-item-list__item">
+
+      <div class="favorite-item-list__item__info">
+        <h3 class="favorite-item-list__item__title">
+          {{item.title}}
+        </h3>
+        <div class="favorite-item-list__item__description">
+          {{item.description}}
+        </div>
+      </div>
+
+      <div class="favorite-item-list__item__actions">
+        <mat-icon class="example-icon" aria-hidden="false" aria-label="Unset as favorite">star</mat-icon>
+      </div>
+
     </li>
   </ul>
 </ng-container>

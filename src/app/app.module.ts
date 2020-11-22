@@ -16,6 +16,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { FavoriteItemListComponent } from './favorite-item-list/favorite-item-list.component';
 import { FavoriteListDialogComponent } from './favorite-list-dialog/favorite-list-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent, MainNavComponent, ItemListComponent, FavoriteItemListComponent, FavoriteListDialogComponent],
@@ -27,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false }),
     MatDialogModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
     MatIconModule,
     MatButtonModule,
   ],

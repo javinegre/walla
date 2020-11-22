@@ -1,0 +1,66 @@
+@import 'src/styles';
+
+.favorite-item-list {
+  min-width: 300px;
+  min-height: 100px;
+
+  &--loading,
+  &--empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &--empty {
+    color: #808080;
+    font-style: italic;
+  }
+
+  &__item {
+    display: flex;
+    margin-bottom: 8px;
+
+    @media all and (min-width: $breakpoint-xxs) {
+      margin-bottom: 12px;
+    }
+
+    @media all and (min-width: $breakpoint-xs) {
+      margin-bottom: 16px;
+    }
+
+    &__info {
+      padding-right: 16px;
+    }
+
+    &__title {
+      color: $color-main;
+      margin: 0;
+      font-size: 12px;
+
+      @media all and (min-width: $breakpoint-xxs) {
+        font-size: 14px;
+      }
+
+      @media all and (min-width: $breakpoint-xs) {
+        font-size: 16px;
+      }
+    }
+
+    &__description {
+      color: #808080;
+      font-size: 11px;
+
+      @media all and (min-width: $breakpoint-xxs) {
+        font-size: 12px;
+      }
+
+      @media all and (min-width: $breakpoint-xs) {
+        font-size: 14px;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

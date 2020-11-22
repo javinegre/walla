@@ -1,14 +1,31 @@
-<ul class="item-list">
-  <li *ngFor="let item of itemList">
-    <strong>{{item.title}}</strong>
-    -
-    {{item.description}}
-    <br/>
-    <button *ngIf="!isFavoriteItem(item)" (click)="addToFavoriteList(item)">
-      Star
-    </button>
-    <button *ngIf="isFavoriteItem(item)" (click)="deleteFromFavoriteList(item)">
-      Unstar
-    </button>
+<ul class="item-list l-list--unstyled">
+  <li class="item-list__item" *ngFor="let item of itemList">
+    <div class="item-list__item__image">
+      <img src="{{item.image}}" alt="{{item.title}}">
+    </div>
+    <div class="item-list__item__info">
+
+      <div class="item-list__item__header">
+        <h3 class="item-list__item__title">{{item.title}}</h3>
+        <div>
+          <button mat-icon-button *ngIf="!isFavoriteItem(item)" (click)="addToFavoriteList(item)">
+            <mat-icon class="example-icon" aria-hidden="false" aria-label="Set as favorite">star_border</mat-icon>
+          </button>
+          <button mat-icon-button *ngIf="isFavoriteItem(item)" (click)="deleteFromFavoriteList(item)">
+            <mat-icon class="example-icon" aria-hidden="false" aria-label="Unset as favorite">star</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="item-list__item__description">
+        {{item.description}}
+      </div>
+
+      <div class="item-list__item__footer">
+        <div class="item-list__item__email">{{item.email}}</div>
+        <div class="item-list__item__price">{{item.price | currency:'EUR':'symbol'}}</div>
+      </div>
+
+    </div>
   </li>
 </ul>

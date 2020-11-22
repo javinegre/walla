@@ -1,0 +1,20 @@
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+
+  &--sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  &__favorites {
+    &__icon{
+      position: relative;
+      top: -1px;
+      left: -4px;
+    }
+  }
+}
