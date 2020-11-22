@@ -37,7 +37,7 @@ export interface IListSortingConfig {
 }
 
 export interface IListPaginationConfig {
-  start: number;
+  pageIndex: number;
   pageSize?: number;
 }
 

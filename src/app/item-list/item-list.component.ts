@@ -21,6 +21,7 @@ export class ItemListComponent implements OnInit {
 
   searchCriteria: IListFilterConfig | undefined;
   sortingCriteria: IListSortingConfig | undefined;
+  currentPage: number = 0;
 
   constructor(private itemListService: ItemListService, private favoriteItemListService: FavoriteItemListService) {}
 
@@ -35,19 +36,23 @@ export class ItemListComponent implements OnInit {
       sorting: this.sortingCriteria,
     };
     const paginationConfig: IListPaginationConfig = {
-      start: 0,
+      pageIndex: this.currentPage,
     };
 
-    this.itemListService.getItemList(refinementConfig, paginationConfig).subscribe((itemList) => (this.itemList = itemList));
+    this.itemListService.getItemList(refinementConfig, paginationConfig).subscribe((itemList) => {
+      this.itemList = this.currentPage === 0 ? itemList : [...(this.itemList ?? []), ...itemList];
+    });
   }
 
   searchCriteriaChanged(searchCriteria: IListFilterConfig): void {
     this.searchCriteria = searchCriteria;
+    this.currentPage = 0;
     this.getItemList();
   }
 
   sortingCriteriaChanged(sortingCriteria: IListSortingConfig): void {
     this.sortingCriteria = sortingCriteria;
+    this.currentPage = 0;
     this.getItemList();
   }
 
@@ -68,5 +73,10 @@ export class ItemListComponent implements OnInit {
 
   isFavoriteItem(item: IItem): boolean {
     return this.favoriteItemList?.find((it) => it.uid === item.uid) !== undefined;
+  }
+
+  loadNextPage(): void {
+    this.currentPage++;
+    this.getItemList();
   }
 }

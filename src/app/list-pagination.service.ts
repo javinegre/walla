@@ -13,9 +13,9 @@ export class ListPaginationService {
       return list;
     }
 
-    const start: number = listPaginationConfig.start ?? 0;
+    const pageIndex: number = listPaginationConfig.pageIndex ?? 0;
     const pageSize: number = listPaginationConfig.pageSize ?? defaultPaginationPageSize;
 
-    return list.slice(start, start + pageSize);
+    return list.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize);
   }
 }
