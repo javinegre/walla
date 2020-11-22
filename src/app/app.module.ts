@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { SortingOptionsComponent } from './sorting-options/sorting-options.component';
+import { OnItemVisibleDirective } from './on-item-visible.directive';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SortingOptionsComponent } from './sorting-options/sorting-options.compo
     FavoriteListDialogComponent,
     ListSearchComponent,
     SortingOptionsComponent,
+    OnItemVisibleDirective,
   ],
   imports: [
     FormsModule,
