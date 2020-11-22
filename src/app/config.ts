@@ -21,3 +21,5 @@ export const defaultSortingConfig: IListSortingConfig = {
   keyName: 'title',
   order: 'asc',
 };
+
+export const defaultPaginationPageSize: number = 5;

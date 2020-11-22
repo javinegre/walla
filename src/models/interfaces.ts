@@ -36,6 +36,11 @@ export interface IListSortingConfig {
   order: TListSortingOrder;
 }
 
+export interface IListPaginationConfig {
+  start: number;
+  pageSize?: number;
+}
+
 export interface IListRefinementConfig {
   filters?: IListFilterConfig;
   sorting?: IListSortingConfig;

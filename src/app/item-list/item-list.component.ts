@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { IFavoriteItem, IItem, IListFilterConfig, IListRefinementConfig, IListSortingConfig } from '../../models/interfaces';
+import {
+  IFavoriteItem,
+  IItem,
+  IListFilterConfig,
+  IListPaginationConfig,
+  IListRefinementConfig,
+  IListSortingConfig,
+} from '../../models/interfaces';
 import { ItemListService } from '../item-list.service';
 import { FavoriteItemListService } from '../favorite-item-list.service';
 
@@ -23,8 +30,15 @@ export class ItemListComponent implements OnInit {
   }
 
   getItemList(): void {
-    const refinementConfig: IListRefinementConfig = { filters: this.searchCriteria, sorting: this.sortingCriteria };
-    this.itemListService.getItemList(refinementConfig).subscribe((itemList) => (this.itemList = itemList));
+    const refinementConfig: IListRefinementConfig = {
+      filters: this.searchCriteria,
+      sorting: this.sortingCriteria,
+    };
+    const paginationConfig: IListPaginationConfig = {
+      start: 0,
+    };
+
+    this.itemListService.getItemList(refinementConfig, paginationConfig).subscribe((itemList) => (this.itemList = itemList));
   }
 
   searchCriteriaChanged(searchCriteria: IListFilterConfig): void {
