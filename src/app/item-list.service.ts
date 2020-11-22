@@ -5,6 +5,7 @@ import { catchError, defaultIfEmpty, filter, map } from 'rxjs/operators';
 import { IItem, IListRefinementConfig } from '../models/interfaces';
 import { TItemUid, TSearchCriteriaTermKeys } from '../models/types';
 import { defaultSearchCriteriaTermKeys } from './config';
+import { ListRefinementService } from './list-refinement.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,45 +17,14 @@ export class ItemListService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(private http: HttpClient) {}
-
-  refineByUids(list: IItem[], uids: TItemUid[]): IItem[] {
-    return list.filter((it) => uids.includes(it.uid));
-  }
-
-  refineList(list: IItem[], listRefinementConfig?: IListRefinementConfig): IItem[] {
-    if (!listRefinementConfig) {
-      return list;
-    }
-
-    if (listRefinementConfig.filters?.uids !== undefined) {
-      list = this.refineByUids(list, listRefinementConfig.filters.uids);
-    }
-
-    if (listRefinementConfig.filters?.searchTerm) {
-      // Using regex instead of .includes to make search case-insensitive
-      const searchRegex = new RegExp(listRefinementConfig?.filters?.searchTerm ?? '', 'i');
-      // If criteria array empty all attributes in defaultSearchCriteriaTermKeys will be checked
-      const criteriaTerms = listRefinementConfig.filters?.searchCriteria?.length
-        ? listRefinementConfig.filters?.searchCriteria
-        : defaultSearchCriteriaTermKeys;
-
-      list = list.filter((it) => {
-        return criteriaTerms.some((criteriaTerm) => {
-          return it[criteriaTerm].match(searchRegex);
-        });
-      });
-    }
-
-    return list;
-  }
+  constructor(private http: HttpClient, private listRefinementService: ListRefinementService) {}
 
   getItemList(listRefinementConfig?: IListRefinementConfig): Observable<IItem[]> {
     return this.http
       .get<IItem[]>(this.itemListUrl, this.httpOptions)
       .pipe(
         map((list) => {
-          return this.refineList(list, listRefinementConfig);
+          return this.listRefinementService.refineList(list, listRefinementConfig);
         })
       )
       .pipe(catchError(this.handleError<IItem[]>('getItemList', [])));
