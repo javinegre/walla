@@ -1,5 +1,5 @@
 <div>
-  <mat-form-field class="example-form-field">
+  <mat-form-field>
     <mat-label>{{getPlaceholderText()}}</mat-label>
     <input matInput type="text" [(ngModel)]="searchTerm" (keyup)="searchTermChanged($event)">
     <button mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchTerm()">

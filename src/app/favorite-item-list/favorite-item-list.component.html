@@ -25,7 +25,12 @@
         </div>
 
         <div class="favorite-item-list__item__actions">
-          <mat-icon class="example-icon" aria-hidden="false" aria-label="Unset as favorite">star</mat-icon>
+          <button mat-icon-button *ngIf="!isFavoriteItem(item)" (click)="addToFavoriteList(item)">
+            <mat-icon aria-hidden="false" aria-label="Set as favorite">star_border</mat-icon>
+          </button>
+          <button mat-icon-button *ngIf="isFavoriteItem(item)" (click)="deleteFromFavoriteList(item)">
+            <mat-icon aria-hidden="false" aria-label="Unset as favorite">star</mat-icon>
+          </button>
         </div>
 
       </li>
