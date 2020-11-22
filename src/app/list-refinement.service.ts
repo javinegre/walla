@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { IItem, IListRefinementConfig } from '../models/interfaces';
-import { TItemUid } from '../models/types';
-import { defaultSearchCriteriaTermKeys } from './config';
+import { IItem, IListRefinementConfig, IListSortingConfig } from '../models/interfaces';
+import { TItemUid, TListSortingOrder } from '../models/types';
+import { defaultSearchCriteriaTermKeys, defaultSortingConfig } from './config';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +28,37 @@ export class ListRefinementService {
     });
   }
 
+  private static applySortingOrder(comparison: number, order: TListSortingOrder): number {
+    return order === 'asc' ? comparison : comparison * -1;
+  }
+
+  private static sortByPrice(itemA: string, itemB: string, sortingOrder: TListSortingOrder): number {
+    const priceA: number = +itemA;
+    const priceB: number = +itemB;
+
+    const comparisonResult: number = priceA > priceB ? 1 : -1;
+
+    return ListRefinementService.applySortingOrder(comparisonResult, sortingOrder);
+  }
+
+  private static sortByString(itemA: string, itemB: string, sortingOrder: TListSortingOrder): number {
+    // TODO case insensitive search
+    const comparisonResult: number = itemA > itemB ? 1 : -1;
+
+    return ListRefinementService.applySortingOrder(comparisonResult, sortingOrder);
+  }
+
+  private sortList(list: IItem[], sortingConfig: IListSortingConfig | undefined): IItem[] {
+    const sortingAttribute = sortingConfig?.keyName ?? defaultSortingConfig.keyName;
+    const sortingOrder = sortingConfig?.order ?? defaultSortingConfig.order;
+
+    const sortingFn = sortingAttribute === 'price' ? ListRefinementService.sortByPrice : ListRefinementService.sortByString;
+
+    return list.sort((a, b) => {
+      return sortingFn(a[sortingAttribute], b[sortingAttribute], sortingOrder);
+    });
+  }
+
   refineList(list: IItem[], listRefinementConfig?: IListRefinementConfig): IItem[] {
     if (!listRefinementConfig) {
       return list;
@@ -40,6 +71,8 @@ export class ListRefinementService {
     if (listRefinementConfig.filters?.searchTerm) {
       list = this.refineBySearchConfig(list, listRefinementConfig);
     }
+
+    list = this.sortList(list, listRefinementConfig.sorting);
 
     return list;
   }

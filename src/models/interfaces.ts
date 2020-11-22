@@ -1,4 +1,4 @@
-import { TItemUid, TSearchCriteriaTermKeys, TSearchCriteriaTermLabels } from './types';
+import { TItemUid, TListSortingOrder, TSearchCriteriaTermKeys, TSearchCriteriaTermLabels } from './types';
 
 export interface IItem {
   uid: TItemUid;
@@ -26,6 +26,17 @@ export interface IListFilterConfig {
   searchCriteria?: TSearchCriteriaTermKeys[];
 }
 
+export interface IListSortingOption {
+  id: TSearchCriteriaTermKeys;
+  label: TSearchCriteriaTermLabels;
+}
+
+export interface IListSortingConfig {
+  keyName: TSearchCriteriaTermKeys;
+  order: TListSortingOrder;
+}
+
 export interface IListRefinementConfig {
   filters?: IListFilterConfig;
+  sorting?: IListSortingConfig;
 }

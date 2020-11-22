@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { SortingOptionsComponent } from './sorting-options/sorting-options.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     FavoriteItemListComponent,
     FavoriteListDialogComponent,
     ListSearchComponent,
+    SortingOptionsComponent,
   ],
   imports: [
     FormsModule,
