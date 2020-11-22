@@ -17,10 +17,23 @@ import { FavoriteItemListComponent } from './favorite-item-list/favorite-item-li
 import { FavoriteListDialogComponent } from './favorite-list-dialog/favorite-list-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ListSearchComponent } from './list-search/list-search.component';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
-  declarations: [AppComponent, MainNavComponent, ItemListComponent, FavoriteItemListComponent, FavoriteListDialogComponent],
+  declarations: [
+    AppComponent,
+    MainNavComponent,
+    ItemListComponent,
+    FavoriteItemListComponent,
+    FavoriteListDialogComponent,
+    ListSearchComponent,
+  ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -31,6 +44,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule,
     MatIconModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonToggleModule,
   ],
   providers: [],
   entryComponents: [FavoriteListDialogComponent],

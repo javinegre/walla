@@ -1,0 +1,18 @@
+<mat-form-field class="example-form-field">
+  <mat-label>{{getPlaceholderText()}}</mat-label>
+  <input matInput type="text" [(ngModel)]="searchTerm" (keyup)="searchTermChanged($event)">
+  <button mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchTerm()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<ng-container *ngIf="viewMode !== 'simple'">
+  <mat-button-toggle-group name="searchCriteria" multiple="multiple" aria-label="Search Criteria">
+    <ng-container *ngFor="let criterion of searchCriteria">
+      <mat-button-toggle
+        [checked]="criterion.active"
+        (change)="criterion.active = $event.source.checked; criterionChanged()"
+        value="{{criterion.id}}">{{criterion.label}}</mat-button-toggle>
+    </ng-container>
+  </mat-button-toggle-group>
+</ng-container>

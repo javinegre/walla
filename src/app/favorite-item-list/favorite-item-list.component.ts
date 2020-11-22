@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoriteItemListService } from '../favorite-item-list.service';
-import { IFavoriteItem, IItem, IListRefinementConfig } from '../../models/interfaces';
+import { IFavoriteItem, IItem, IListFilterConfig, IListRefinementConfig } from '../../models/interfaces';
 import { ItemListService } from '../item-list.service';
 
 @Component({
@@ -12,6 +12,8 @@ export class FavoriteItemListComponent implements OnInit {
   itemList: IItem[] | undefined;
   favoriteItemList: IFavoriteItem[] | undefined;
 
+  searchCriteria: IListFilterConfig | undefined;
+
   constructor(private itemListService: ItemListService, private favoriteItemListService: FavoriteItemListService) {}
 
   ngOnInit(): void {
@@ -20,7 +22,11 @@ export class FavoriteItemListComponent implements OnInit {
 
   getItemList(): void {
     const filterConfig: IListRefinementConfig = {
-      filters: { uids: this.favoriteItemList?.map((it) => it.uid) ?? [] },
+      filters: {
+        ...this.searchCriteria,
+        uids: this.favoriteItemList?.map((it) => it.uid) ?? [],
+        searchCriteria: ['title', 'description'], // Only searching under these attributes in favorite list
+      },
     };
     this.itemListService.getItemList(filterConfig).subscribe((itemList) => (this.itemList = itemList));
   }
@@ -30,5 +36,10 @@ export class FavoriteItemListComponent implements OnInit {
       this.favoriteItemList = favoriteItemList;
       this.getItemList();
     });
+  }
+
+  searchCriteriaChanged(searchCriteria: IListFilterConfig): void {
+    this.searchCriteria = searchCriteria;
+    this.getItemList();
   }
 }

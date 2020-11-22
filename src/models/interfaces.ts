@@ -1,4 +1,4 @@
-import { TItemUid } from './types';
+import { TItemUid, TSearchCriteriaTermKeys, TSearchCriteriaTermLabels } from './types';
 
 export interface IItem {
   uid: TItemUid;
@@ -14,10 +14,16 @@ export interface IFavoriteItem {
   uid: TItemUid;
 }
 
+export interface ISearchCriteriaOption {
+  id: TSearchCriteriaTermKeys;
+  label: TSearchCriteriaTermLabels;
+  active: boolean;
+}
+
 export interface IListFilterConfig {
   uids?: TItemUid[];
   searchTerm?: string;
-  searchCriteria?: string;
+  searchCriteria?: TSearchCriteriaTermKeys[];
 }
 
 export interface IListRefinementConfig {

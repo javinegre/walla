@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, OperatorFunction } from 'rxjs';
-import { catchError, filter, map } from 'rxjs/operators';
+import { catchError, defaultIfEmpty, filter, map } from 'rxjs/operators';
 import { IItem, IListRefinementConfig } from '../models/interfaces';
-import { TItemUid } from '../models/types';
+import { TItemUid, TSearchCriteriaTermKeys } from '../models/types';
+import { defaultSearchCriteriaTermKeys } from './config';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,21 @@ export class ItemListService {
 
     if (listRefinementConfig.filters?.uids !== undefined) {
       list = this.refineByUids(list, listRefinementConfig.filters.uids);
+    }
+
+    if (listRefinementConfig.filters?.searchTerm) {
+      // Using regex instead of .includes to make search case-insensitive
+      const searchRegex = new RegExp(listRefinementConfig?.filters?.searchTerm ?? '', 'i');
+      // If criteria array empty all attributes in defaultSearchCriteriaTermKeys will be checked
+      const criteriaTerms = listRefinementConfig.filters?.searchCriteria?.length
+        ? listRefinementConfig.filters?.searchCriteria
+        : defaultSearchCriteriaTermKeys;
+
+      list = list.filter((it) => {
+        return criteriaTerms.some((criteriaTerm) => {
+          return it[criteriaTerm].match(searchRegex);
+        });
+      });
     }
 
     return list;

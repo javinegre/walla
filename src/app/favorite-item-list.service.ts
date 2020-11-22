@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { TItemUid } from '../models/types';
 @Injectable({
   providedIn: 'root',
 })
-export class FavoriteItemListService {
+export class FavoriteItemListService implements OnDestroy {
   private favoriteItemListUrl = 'api/favoriteItemList';
 
   private listSubject: Subject<IFavoriteItem[]> | undefined;
@@ -77,7 +77,7 @@ export class FavoriteItemListService {
     };
   }
 
-  onDestroy() {
+  ngOnDestroy() {
     this.listSubscription?.unsubscribe();
   }
 }
