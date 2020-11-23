@@ -1,12 +1,15 @@
-<mat-form-field appearance="fill">
-  <mat-label>Filter By:</mat-label>
-  <select matNativeControl [(ngModel)]="selectedCriteria" (change)="emitSortingChange()">
-    <ng-container *ngFor="let option of sortingOptionConfig">
-      <option value="{{option.id}}">{{option.label}}</option>
-    </ng-container>
-  </select>
-</mat-form-field>
+<div class="list-sorting">
+  <div class="list-sorting__label">Sort by:</div>
 
-<button mat-icon-button (click)="changeSortingOrder()">
-  <mat-icon aria-hidden="false" aria-label="Set as favorite">swap_vert</mat-icon>
-</button>
+  <mat-form-field appearance="standard" color="primary">
+    <mat-select [(ngModel)]="selectedCriteria" (selectionChange)="emitSortingChange()">
+      <ng-container *ngFor="let option of sortingOptionConfig">
+        <mat-option value="{{option.id}}">{{option.label}}</mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-icon-button (click)="changeSortingOrder()" [matTooltip]="getTooltipText()" matTooltipPosition="before">
+    <mat-icon aria-hidden="false" aria-label="Set as favorite">swap_vert</mat-icon>
+  </button>
+</div>

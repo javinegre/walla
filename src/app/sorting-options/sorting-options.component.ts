@@ -32,6 +32,10 @@ export class SortingOptionsComponent implements OnInit {
     };
   }
 
+  getTooltipText(): string {
+    return `Change to ${this.selectedOrder === 'asc' ? 'descending' : 'ascending'} order`;
+  }
+
   emitSortingChange(): void {
     this.onSortingChange.emit(this.getSortingConfig());
   }

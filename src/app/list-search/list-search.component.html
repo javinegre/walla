@@ -1,14 +1,26 @@
-<div>
-  <mat-form-field>
-    <mat-label>{{getPlaceholderText()}}</mat-label>
-    <input matInput type="text" [(ngModel)]="searchTerm" (keyup)="searchTermChanged($event)">
-    <button mat-button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchTerm()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+<div class="list-search">
 
-  <ng-container *ngIf="viewMode !== 'simple'">
-    <mat-button-toggle-group name="searchCriteria" multiple="multiple" aria-label="Search Criteria">
+  <div class="list-search__search">
+    <mat-form-field class="list-search__search__field">
+      <button mat-button matPrefix mat-icon-button aria-label="Search" disabled>
+        <mat-icon>search</mat-icon>
+      </button>
+      <mat-label>{{getPlaceholderText()}}</mat-label>
+      <input matInput type="text" [(ngModel)]="searchTerm" (keyup)="searchTermChanged($event)">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchTerm()" [style.opacity]="searchTerm?.length ? 1 : 0">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="list-search__search__toggle" *ngIf="hasFilterOptions()">
+      <button mat-icon-button (click)="toggleFilter()" matTooltip="Toggle Search Options" matTooltipPosition="before">
+        <mat-icon aria-hidden="false" aria-label="Toggle filters">tune</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="list-search__filter" *ngIf="hasFilterOptions() && isFilterVisible">
+    <div class="list-search__filter__label">Search by:</div>
+    <mat-button-toggle-group name="searchCriteria" multiple="multiple" appearance="standard" aria-label="Search Criteria">
       <ng-container *ngFor="let criterion of searchCriteria">
         <mat-button-toggle
           [checked]="criterion.active"
@@ -16,5 +28,6 @@
           value="{{criterion.id}}">{{criterion.label}}</mat-button-toggle>
       </ng-container>
     </mat-button-toggle-group>
-  </ng-container>
+  </div>
+
 </div>

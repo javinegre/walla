@@ -19,6 +19,8 @@ export class ListSearchComponent implements OnInit, OnDestroy {
 
   searchCriteria = defaultSearchCriteriaConfig;
 
+  isFilterVisible = false;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -49,6 +51,14 @@ export class ListSearchComponent implements OnInit, OnDestroy {
 
   getPlaceholderText(): string {
     return 'Search by title, description, price, ...';
+  }
+
+  hasFilterOptions(): boolean {
+    return this.viewMode !== 'simple';
+  }
+
+  toggleFilter(): void {
+    this.isFilterVisible = !this.isFilterVisible;
   }
 
   ngOnDestroy() {

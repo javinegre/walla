@@ -4,7 +4,7 @@
 
 <ng-container *ngIf="itemList !== undefined">
 
-  <app-list-search  (onSearchCriteriaChange)="searchCriteriaChanged($event)" [viewMode]="'simple'"></app-list-search>
+  <app-list-search  (onSearchCriteriaChange)="searchCriteriaChanged($event)" viewMode="simple"></app-list-search>
 
   <div *ngIf="!itemList?.length" class="favorite-item-list favorite-item-list--empty">
     Your favorite item list is empty

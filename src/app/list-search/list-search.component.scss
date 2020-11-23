@@ -1,3 +1,20 @@
-.mat-button-toggle-label-content {
-  line-height: 32px !important;
+.list-search {
+  &__search {
+    display: flex;
+
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+  &__filter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &__label {
+      margin-right: 8px;
+      color: #808080;
+      font-weight: 100;
+    }
+  }
 }

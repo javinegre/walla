@@ -1,0 +1,11 @@
+.list-sorting {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  &__label {
+    margin-right: 8px;
+    color: #808080;
+    font-weight: 100;
+  }
+}
