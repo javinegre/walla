@@ -10,8 +10,9 @@ import { defaultSearchCriteriaConfig } from '../app-config';
   styleUrls: ['./list-search.component.scss'],
 })
 export class ListSearchComponent implements OnInit, OnDestroy {
-  @Input() viewMode: 'default' | 'simple' = 'default';
   @Input() searchTerm: string | undefined;
+  @Input() viewMode: 'default' | 'simple' = 'default';
+  @Input() placeholderText: string | undefined;
   @Output() onSearchCriteriaChange = new EventEmitter<IListFilterConfig>();
 
   private searchTermSubject = new Subject<Event>();
@@ -50,7 +51,7 @@ export class ListSearchComponent implements OnInit, OnDestroy {
   }
 
   getPlaceholderText(): string {
-    return 'Search by title, description, price, ...';
+    return this.placeholderText ?? 'Search by title, description, price, ...';
   }
 
   hasFilterOptions(): boolean {

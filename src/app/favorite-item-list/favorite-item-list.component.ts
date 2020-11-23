@@ -29,7 +29,7 @@ export class FavoriteItemListComponent implements OnInit {
       filters: {
         ...this.searchCriteria,
         uids: this.favoriteItemList?.map((it) => it.uid) ?? [],
-        searchCriteria: ['title', 'description'], // Only searching under these attributes in favorite list
+        searchCriteria: ['title'], // Only searching for title attribute in favorite list
       },
     };
     this.itemListService.getItemList(filterConfig).subscribe((itemList) => (this.itemList = itemList));

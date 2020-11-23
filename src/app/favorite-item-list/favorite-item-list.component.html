@@ -4,7 +4,11 @@
 
 <ng-container *ngIf="itemList !== undefined">
 
-  <app-list-search  (onSearchCriteriaChange)="searchCriteriaChanged($event)" viewMode="simple"></app-list-search>
+  <app-list-search
+    (onSearchCriteriaChange)="searchCriteriaChanged($event)"
+    viewMode="simple"
+    placeholderText="Search by title">
+  </app-list-search>
 
   <div *ngIf="!itemList?.length" class="favorite-item-list favorite-item-list--empty">
     Your favorite item list is empty
@@ -16,12 +20,10 @@
       <li *ngFor="let item of itemList" class="favorite-item-list__item">
 
         <div class="favorite-item-list__item__info">
+          <img class="favorite-item-list__item__image" src="{{item.image}}" alt="{{item.title}}">
           <h3 class="favorite-item-list__item__title">
             {{item.title}}
           </h3>
-          <div class="favorite-item-list__item__description">
-            {{item.description}}
-          </div>
         </div>
 
         <div class="favorite-item-list__item__actions">
