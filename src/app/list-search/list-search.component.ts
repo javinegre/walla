@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { IListFilterConfig } from '../../models/interfaces';
-import { defaultSearchCriteriaConfig } from '../config';
+import { defaultSearchCriteriaConfig } from '../app-config';
 
 @Component({
   selector: 'app-list-search',

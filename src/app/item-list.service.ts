@@ -4,7 +4,7 @@ import { Observable, of, OperatorFunction } from 'rxjs';
 import { catchError, defaultIfEmpty, filter, map } from 'rxjs/operators';
 import { IItem, IListPaginationConfig, IListRefinementConfig } from '../models/interfaces';
 import { TItemUid, TSearchCriteriaTermKeys } from '../models/types';
-import { defaultSearchCriteriaTermKeys } from './config';
+import { defaultSearchCriteriaTermKeys } from './app-config';
 import { ListRefinementService } from './list-refinement.service';
 import { ListPaginationService } from './list-pagination.service';
 

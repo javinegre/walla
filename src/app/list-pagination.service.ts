@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IItem, IListPaginationConfig } from '../models/interfaces';
-import { defaultPaginationPageSize } from './config';
+import { defaultPaginationPageSize } from './app-config';
 
 @Injectable({
   providedIn: 'root',

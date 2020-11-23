@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IItem, IListRefinementConfig, IListSortingConfig } from '../models/interfaces';
 import { TItemUid, TListSortingOrder } from '../models/types';
-import { defaultSearchCriteriaTermKeys, defaultSortingConfig } from './config';
+import { defaultSearchCriteriaTermKeys, defaultSortingConfig } from './app-config';
 
 @Injectable({
   providedIn: 'root',

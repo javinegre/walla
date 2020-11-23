@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { defaultSortingConfig, defaultSortingOptionConfig } from '../config';
+import { defaultSortingConfig, defaultSortingOptionConfig } from '../app-config';
 import { IListFilterConfig, IListSortingConfig } from '../../models/interfaces';
 
 @Component({
