@@ -1,7 +1,10 @@
 <mat-toolbar color="primary" class="main-nav--sticky">
   <nav class="main-nav l-wrapper">
     <div>Item List</div>
-    <button class="main-nav__favorites" mat-stroked-button (click)="openFavoriteListDialog()">
+    <button class="main-nav__favorites"
+            mat-stroked-button
+            [disabled]="getFavoriteListCount() === 0"
+            (click)="openFavoriteListDialog()">
       <mat-icon class="main-nav__favorites__icon" aria-hidden="false" aria-label="Favorite list">star</mat-icon>
       Favorites ({{getFavoriteListCount()}})
     </button>

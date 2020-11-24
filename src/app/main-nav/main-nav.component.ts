@@ -26,11 +26,9 @@ export class MainNavComponent implements OnInit {
     return this.favoriteItemList?.length ?? 0;
   }
 
-  openFavoriteListDialog() {
+  openFavoriteListDialog(): void {
     const favoriteListDialogRef = this.dialog.open(FavoriteListDialogComponent);
 
-    favoriteListDialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
+    favoriteListDialogRef.afterClosed().subscribe();
   }
 }
