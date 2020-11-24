@@ -1,15 +1,17 @@
 {
   "name": "wallapop-test",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:open": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ngcc",
-    "fix:prettier": "./node_modules/prettier/bin-prettier.js  --config ./.prettierrc --write  --list-different 'src/{app,environments,assets}/**/**/*{.ts,.js,.json,.css,.scss}'"
+    "fix:prettier": "./node_modules/prettier/bin-prettier.js  --config ./.prettierrc --write  --list-different 'src/{app,environments,assets}/**/**/*{.ts,.js,.json,.css,.scss}'",
+    "coverage": "ng test --no-watch --code-coverage"
   },
   "private": true,
   "dependencies": {
