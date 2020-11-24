@@ -13,7 +13,7 @@ export class ListSearchComponent implements OnInit, OnDestroy {
   @Input() searchTerm: string | undefined;
   @Input() viewMode: 'default' | 'simple' = 'default';
   @Input() placeholderText: string | undefined;
-  @Output() onSearchCriteriaChange = new EventEmitter<IListFilterConfig>();
+  @Output() searchCriteriaChange = new EventEmitter<IListFilterConfig>();
 
   private searchTermSubject = new Subject<Event>();
   private searchTermSubscription: Subscription | undefined;
@@ -26,7 +26,7 @@ export class ListSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchTermSubscription = this.searchTermSubject.pipe(debounceTime(400), distinctUntilChanged()).subscribe(() => {
-      this.onSearchCriteriaChange.emit(this.getFilterConfig());
+      this.searchCriteriaChange.emit(this.getFilterConfig());
     });
   }
 
@@ -36,11 +36,11 @@ export class ListSearchComponent implements OnInit, OnDestroy {
 
   clearSearchTerm(): void {
     this.searchTerm = undefined;
-    this.onSearchCriteriaChange.emit(this.getFilterConfig());
+    this.searchCriteriaChange.emit(this.getFilterConfig());
   }
 
   criterionChanged(): void {
-    this.onSearchCriteriaChange.emit(this.getFilterConfig());
+    this.searchCriteriaChange.emit(this.getFilterConfig());
   }
 
   getFilterConfig(): IListFilterConfig {
@@ -62,7 +62,7 @@ export class ListSearchComponent implements OnInit, OnDestroy {
     this.isFilterVisible = !this.isFilterVisible;
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.searchTermSubscription?.unsubscribe();
   }
 }

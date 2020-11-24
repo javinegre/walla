@@ -19,7 +19,7 @@ describe('ListPaginationService', () => {
 
   describe('Pagination Options', () => {
     it('should return 5 items by default', () => {
-      const mockDefaultPaginationPageSize: number = 5;
+      const mockDefaultPaginationPageSize = 5;
       const mockPaginationOptions: IListPaginationConfig = {
         pageIndex: 0,
         pageSize: mockDefaultPaginationPageSize,

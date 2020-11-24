@@ -1,6 +1,6 @@
-<app-list-search (onSearchCriteriaChange)="searchCriteriaChanged($event)"></app-list-search>
+<app-list-search (searchCriteriaChange)="searchCriteriaChanged($event)"></app-list-search>
 
-<app-sorting-options (onSortingChange)="sortingCriteriaChanged($event)"></app-sorting-options>
+<app-sorting-options (sortingChange)="sortingCriteriaChanged($event)"></app-sorting-options>
 
 <ul class="item-list l-list--unstyled">
   <li class="item-list__item" *ngFor="let item of itemList ; last as isLast">
@@ -25,7 +25,7 @@
         {{item.description}}
       </div>
 
-      <div *ngIf="isLast" appOnItemVisible (onItemVisible)="loadNextPage()"></div>
+      <div *ngIf="isLast" appOnItemVisible (itemVisible)="loadNextPage()"></div>
 
       <div class="item-list__item__footer">
         <div class="item-list__item__email">{{item.email}}</div>

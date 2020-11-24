@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, OperatorFunction } from 'rxjs';
-import { catchError, defaultIfEmpty, filter, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { IItem, IListPaginationConfig, IListRefinementConfig } from '../models/interfaces';
-import { TItemUid, TSearchCriteriaTermKeys } from '../models/types';
-import { defaultSearchCriteriaTermKeys } from './app-config';
 import { ListRefinementService } from './list-refinement.service';
 import { ListPaginationService } from './list-pagination.service';
 
@@ -44,7 +42,7 @@ export class ItemListService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T): (error: any) => Observable<T> {
     return (error: any): Observable<T> => {
       console.error(error); // log to console instead
 

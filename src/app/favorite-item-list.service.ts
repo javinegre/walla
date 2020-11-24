@@ -68,7 +68,7 @@ export class FavoriteItemListService implements OnDestroy {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T): (error: any) => Observable<T> {
     return (error: any): Observable<T> => {
       console.error(error); // log to console instead
 
@@ -77,7 +77,7 @@ export class FavoriteItemListService implements OnDestroy {
     };
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.listSubscription?.unsubscribe();
   }
 }

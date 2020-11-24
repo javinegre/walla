@@ -5,7 +5,7 @@
 <ng-container *ngIf="itemList !== undefined">
 
   <app-list-search
-    (onSearchCriteriaChange)="searchCriteriaChanged($event)"
+    (searchCriteriaChange)="searchCriteriaChanged($event)"
     viewMode="simple"
     placeholderText="Search by title">
   </app-list-search>

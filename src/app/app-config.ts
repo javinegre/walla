@@ -22,4 +22,4 @@ export const defaultSortingConfig: IListSortingConfig = {
   order: 'asc',
 };
 
-export const defaultPaginationPageSize: number = 5;
+export const defaultPaginationPageSize = 5;

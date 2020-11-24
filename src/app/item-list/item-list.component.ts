@@ -21,7 +21,7 @@ export class ItemListComponent implements OnInit {
 
   searchCriteria: IListFilterConfig | undefined;
   sortingCriteria: IListSortingConfig | undefined;
-  currentPage: number = 0;
+  currentPage = 0;
 
   isEndOfList: boolean | undefined;
 

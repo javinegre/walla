@@ -7,7 +7,7 @@ import { IFavoriteItem, IItem } from '../models/interfaces';
   providedIn: 'root',
 })
 export class InMemoryDataService implements InMemoryDbService {
-  createDb() {
+  createDb(): { itemList: IItem[]; favoriteItemList: IFavoriteItem[] } {
     const itemList = mockItemList;
     const favoriteItemList: IFavoriteItem[] = [];
 

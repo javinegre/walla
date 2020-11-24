@@ -9,25 +9,6 @@ import { defaultSearchCriteriaTermKeys, defaultSortingConfig } from './app-confi
 export class ListRefinementService {
   constructor() {}
 
-  private refineByUids(list: IItem[], uids: TItemUid[]): IItem[] {
-    return list.filter((it) => uids.includes(it.uid));
-  }
-
-  private refineBySearchConfig(list: IItem[], listRefinementConfig?: IListRefinementConfig): IItem[] {
-    // Using regex instead of .includes to make search case-insensitive
-    const searchRegex = new RegExp(listRefinementConfig?.filters?.searchTerm ?? '', 'i');
-    // If criteria array empty all attributes in defaultSearchCriteriaTermKeys will be checked
-    const criteriaTerms = listRefinementConfig?.filters?.searchCriteria?.length
-      ? listRefinementConfig.filters.searchCriteria
-      : defaultSearchCriteriaTermKeys;
-
-    return list.filter((it) => {
-      return criteriaTerms.some((criteriaTerm) => {
-        return it[criteriaTerm].match(searchRegex);
-      });
-    });
-  }
-
   private static applySortingOrder(comparison: number, order: TListSortingOrder): number {
     return order === 'asc' ? comparison : comparison * -1;
   }
@@ -46,6 +27,25 @@ export class ListRefinementService {
     const comparisonResult: number = itemA > itemB ? 1 : -1;
 
     return ListRefinementService.applySortingOrder(comparisonResult, sortingOrder);
+  }
+
+  private refineByUids(list: IItem[], uids: TItemUid[]): IItem[] {
+    return list.filter((it) => uids.includes(it.uid));
+  }
+
+  private refineBySearchConfig(list: IItem[], listRefinementConfig?: IListRefinementConfig): IItem[] {
+    // Using regex instead of .includes to make search case-insensitive
+    const searchRegex = new RegExp(listRefinementConfig?.filters?.searchTerm ?? '', 'i');
+    // If criteria array empty all attributes in defaultSearchCriteriaTermKeys will be checked
+    const criteriaTerms = listRefinementConfig?.filters?.searchCriteria?.length
+      ? listRefinementConfig.filters.searchCriteria
+      : defaultSearchCriteriaTermKeys;
+
+    return list.filter((it) => {
+      return criteriaTerms.some((criteriaTerm) => {
+        return it[criteriaTerm].match(searchRegex);
+      });
+    });
   }
 
   private sortList(list: IItem[], sortingConfig: IListSortingConfig | undefined): IItem[] {

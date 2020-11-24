@@ -8,7 +8,7 @@ import { IListFilterConfig, IListSortingConfig } from '../../models/interfaces';
   styleUrls: ['./sorting-options.component.scss'],
 })
 export class SortingOptionsComponent implements OnInit {
-  @Output() onSortingChange = new EventEmitter<IListSortingConfig>();
+  @Output() sortingChange = new EventEmitter<IListSortingConfig>();
 
   defaultSortingConfig = defaultSortingConfig;
   sortingOptionConfig = defaultSortingOptionConfig;
@@ -37,6 +37,6 @@ export class SortingOptionsComponent implements OnInit {
   }
 
   emitSortingChange(): void {
-    this.onSortingChange.emit(this.getSortingConfig());
+    this.sortingChange.emit(this.getSortingConfig());
   }
 }
