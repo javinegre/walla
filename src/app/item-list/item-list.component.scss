@@ -87,4 +87,22 @@
     }
 
   }
+
+  &__loading-beacon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 12px;
+    font-style: italic;
+    font-weight: 100;
+    color: $color-main;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    transition: opacity ease-in 200ms;
+
+    &--hidden {
+      opacity: 0;
+    }
+  }
 }

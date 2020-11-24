@@ -35,3 +35,8 @@
     </div>
   </li>
 </ul>
+
+<div class="item-list__loading-beacon"
+     [class.item-list__loading-beacon--hidden]="isEndOfList || !itemList?.length">
+  Loading more ...
+</div>

@@ -23,11 +23,15 @@ export class ItemListComponent implements OnInit {
   sortingCriteria: IListSortingConfig | undefined;
   currentPage: number = 0;
 
+  isEndOfList: boolean | undefined;
+
   constructor(private itemListService: ItemListService, private favoriteItemListService: FavoriteItemListService) {}
 
   ngOnInit(): void {
     this.getItemList();
     this.getFavoriteItemList();
+
+    this.isEndOfList = false;
   }
 
   getItemList(): void {
@@ -41,18 +45,27 @@ export class ItemListComponent implements OnInit {
 
     this.itemListService.getItemList(refinementConfig, paginationConfig).subscribe((itemList) => {
       this.itemList = this.currentPage === 0 ? itemList : [...(this.itemList ?? []), ...itemList];
+
+      if (!itemList.length) {
+        this.isEndOfList = true;
+      }
     });
+  }
+
+  private resetListPagination(): void {
+    this.currentPage = 0;
+    this.isEndOfList = false;
   }
 
   searchCriteriaChanged(searchCriteria: IListFilterConfig): void {
     this.searchCriteria = searchCriteria;
-    this.currentPage = 0;
+    this.resetListPagination();
     this.getItemList();
   }
 
   sortingCriteriaChanged(sortingCriteria: IListSortingConfig): void {
     this.sortingCriteria = sortingCriteria;
-    this.currentPage = 0;
+    this.resetListPagination();
     this.getItemList();
   }
 
